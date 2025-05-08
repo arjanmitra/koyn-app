@@ -38,7 +38,7 @@ const CoinHomeDetail = ({ coinData }: CoinHomeDetailProps) => {
         return sorted;
     }, [coinData, sortKey, sortDirection]);
 
-    const handleSort = (key: any) => {
+    const handleSort = (key: keyof CoinCapAsset) => {
         if (key === sortKey) {
             setSortDirection(prev => (prev === "asc" ? "desc" : "asc"));
         } else {

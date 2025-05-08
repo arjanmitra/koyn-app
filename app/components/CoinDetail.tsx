@@ -1,19 +1,19 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { CoinCapAsset } from '../types/coincap'
+import { CoinCapAsset, CoinCapAssetHistory } from '../types/coincap'
 import { formatCurrency } from '../utils/helperFunctions'
 import ChartDetail from './ChartDetail';
 import MetadataDetail from './MetadataDetail';
 
 interface CoinDetailProps {
     initialCoinData: CoinCapAsset,
-    initialHistoryData: any
+    initialHistoryData: CoinCapAssetHistory[]
 }
 
 const CoinDetail = ({ initialCoinData, initialHistoryData }: CoinDetailProps) => {
     const [coin, setCoin] = useState<CoinCapAsset>(initialCoinData)
-    const [coinHistory, setCoinHistory] = useState(initialHistoryData)
+    const [coinHistory, setCoinHistory] = useState<CoinCapAssetHistory[]>(initialHistoryData)
 
     useEffect(() => {
         const interval = setInterval(async () => {
