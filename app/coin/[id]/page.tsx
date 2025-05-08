@@ -1,5 +1,4 @@
 import CoinDetail from '@/app/components/CoinDetail';
-import { use } from 'react';
 
 interface CoinDetailProps {
     params: { id: string }

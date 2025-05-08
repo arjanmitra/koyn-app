@@ -14,11 +14,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const raleway = Raleway({
-  variable: '--font-raleway',
-  subsets: ['latin']
-})
-
 export const metadata: Metadata = {
   title: "Koyn",
   description: "Your crypto. All in one place.",
