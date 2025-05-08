@@ -1,6 +1,6 @@
 'use client'
 import React from "react";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { CoinCapAsset } from "../types/coincap";
 import { formatCurrency } from "../utils/helperFunctions";
@@ -32,8 +32,8 @@ const CoinHomeDetail = ({ coinData }: CoinHomeDetailProps) => {
             }
 
             return sortDirection === "asc"
-                ? (aValue as number) - (bValue as any)
-                : (bValue as any) - (aValue as number);
+                ? (aValue as number) - ((bValue as unknown) as number)
+                : ((bValue as unknown) as number) - (aValue as number);
         });
         return sorted;
     }, [coinData, sortKey, sortDirection]);

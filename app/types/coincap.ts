@@ -17,3 +17,9 @@ export interface CoinCapAssetResponse {
     data: CoinCapAsset[]
     timestamp: number
 }
+
+export interface CoinCapAssetHistory {
+    priceUsd: string
+    time: number
+    date: string
+}

@@ -1,5 +1,3 @@
-import { CoinCapAsset } from "../types/coincap";
-
 export const formatCurrency = (numStr: string): string => {
     const num = parseFloat(numStr)
     if (num >= 1_000_000_000) {

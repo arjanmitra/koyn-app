@@ -1,10 +1,6 @@
 import { CoinCapAssetResponse } from "@/app/types/coincap";
 import { NextResponse } from "next/server";
 
-interface GETProps {
-    params: { id: string, interval: string }
-}
-
 export const GET = async (_req: Request) => {
 
     const { searchParams } = new URL(_req.url)

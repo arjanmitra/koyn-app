@@ -1,8 +1,9 @@
 import React from "react";
-import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+import { CoinCapAssetHistory } from "../types/coincap";
 
 interface ChartDetailProps {
-    coinHistory: any
+    coinHistory: CoinCapAssetHistory[]
     xAxisDataKey: string
     yAxisDataKey: string
 }

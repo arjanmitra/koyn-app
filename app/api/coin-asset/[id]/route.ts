@@ -1,10 +1,6 @@
 import { CoinCapAssetResponse } from '@/app/types/coincap'
 import { NextResponse } from 'next/server'
 
-interface GETProps {
-    params: { id: string }
-}
-
 export const GET = async (_req: Request, context: { params: { id: string } }) => {
     const { id } = await context.params
     const res = await fetch(`https://rest.coincap.io/v3/assets/${id}`, {
