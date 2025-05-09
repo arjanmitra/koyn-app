@@ -1,7 +1,7 @@
 import CoinDetail from '@/app/components/CoinDetail';
 
 interface CoinDetailProps {
-    params: { id: string }
+    params: any
 }
 const CoinPage = async ({ params }: CoinDetailProps) => {
 
