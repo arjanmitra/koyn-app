@@ -7,16 +7,23 @@ A cryptocurrency dashboard built with **Next.js**, **TypeScript**, **Tailwind CS
 ## Setup Instructions
 
 ```bash
-git clone https://github.com/your-username/coin-dashboard.git
-cd coin-dashboard
 
+1. Clone this repo.
+git clone https://github.com/arjanmitra/koyn-app.git
+
+2. Install all dependencies.
 npm install
 
+3. Set the CoinCap API key in a .env.local file.
 COINCAP_API_KEY=your_api_key_here
 
+4. Start the local dev server.
 npm run dev
 
-npm test
+5. Run the tests.
+npm runt test
+
+```
 
 ## Architecture & Approach
 
