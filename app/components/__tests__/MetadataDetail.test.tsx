@@ -47,16 +47,4 @@ describe('CoinHomeDetail', () => {
         // Check if the string is a valid number
         expect(content[0]).toBe('$');
     });
-    it("expects VWAP to be a percetnage", () => {
-        render(<MetadataDetail coin={dummyData} />);
-
-        const span = screen.getByTestId("vwap");
-        expect(span).toBeInTheDocument();
-
-        const content: any = span.textContent;
-        expect(typeof content).toBe("string");
-
-        // Check if the string is a valid number
-        expect(content[content.length - 1]).toBe('%');
-    });
 })

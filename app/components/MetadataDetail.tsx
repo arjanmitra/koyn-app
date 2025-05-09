@@ -16,7 +16,7 @@ const MetadataDetail = ({ coin }: MetadataDetailProps) => {
             <div>Market Cap: <span className="chartData">{formatCurrency(coin.marketCapUsd)}</span></div>
             <div>Volume 24 Hr: <span className="chartData">{formatCurrency(coin.volumeUsd24Hr)}</span></div>
             <div>Change 24 Hr: <span className="chartData">{formatCurrency(coin.changePercent24Hr)}</span></div>
-            <div>VWAP 24 Hr: <span className="chartData" data-testid='vwap'>{formatCurrency(coin.vwap24Hr)}%</span></div>
+            <div>VWAP 24 Hr: <span className="chartData" data-testid='vwap'>{formatCurrency(coin.vwap24Hr)}</span></div>
         </div>
     )
 }
