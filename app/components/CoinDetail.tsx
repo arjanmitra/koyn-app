@@ -21,9 +21,9 @@ const CoinDetail = ({ initialCoinData, initialHistoryData }: CoinDetailProps) =>
             const data = await res.json()
             setCoin(data)
 
-            // const resHistory = await fetch(`/api/coin-asset/${coin.id}/history`)
-            // const dataHistory = await resHistory.json()
-            // setCoinHistory(dataHistory)
+            const resHistory = await fetch(`/api/coin-asset/${coin.id}/history`)
+            const dataHistory = await resHistory.json()
+            setCoinHistory(dataHistory)
         }, 10000)
 
         return () => clearInterval(interval)
