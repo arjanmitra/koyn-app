@@ -1,7 +1,7 @@
 import { CoinCapAssetResponse } from "@/app/types/coincap";
 import { NextResponse } from "next/server";
 
-export const GET = async (_req: Request, { params }: { params: { id: string } }) => {
+export const GET = async (_req: Request, { params }: any) => {
 
     const { searchParams } = new URL(_req.url)
     const { id } = await params
