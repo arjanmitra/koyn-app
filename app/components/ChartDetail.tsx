@@ -1,5 +1,5 @@
 import React from "react";
-import { LineChart, Line, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { CoinCapAssetHistory } from "../types/coincap";
 
 interface ChartDetailProps {
@@ -9,19 +9,25 @@ interface ChartDetailProps {
 }
 
 const ChartDetail = ({ coinHistory, xAxisDataKey, yAxisDataKey }: ChartDetailProps) => {
+
+    for (let i = 0; i < coinHistory.length; i++) {
+        coinHistory[i].date = coinHistory[i].date.split("T")[0];
+    }
+
     return (
-        <LineChart width={800} height={300} margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-        }} data={coinHistory}>
-            <XAxis dataKey={xAxisDataKey} />
-            <YAxis dataKey={yAxisDataKey} />
-            <Tooltip />
-            <Legend />
-            <Line type={'monotone'} dataKey={'priceUsd'} stroke={'white'} strokeWidth={0.2} />
-        </LineChart>
+        <div className="mt-20 mb-20">
+            <LineChart width={1100} height={300} margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5,
+            }} data={coinHistory}>
+                <XAxis dataKey={xAxisDataKey} />
+                <YAxis dataKey={yAxisDataKey} />
+                <Legend />
+                <Line type={'monotone'} dataKey={'priceUsd'} stroke={'white'} fillOpacity={1} fill="white" />
+            </LineChart>
+        </div>
     )
 }
 

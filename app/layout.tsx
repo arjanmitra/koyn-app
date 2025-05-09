@@ -1,8 +1,11 @@
+'use client'
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Home, User } from "lucide-react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,7 +17,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: "Koyn",
   description: "Your crypto. All in one place.",
 };
@@ -25,11 +28,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark:bg-black dark:text-white">
+    <html lang="en" className="dark:bg-black dark:text-white font-sans">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <header className="sticky top-0 z-50 bg-stone-400 shadow-md border-none rounded-2xl">
+        <header className="sticky top-0 z-50 bg-stone-400 shadow-md border-none">
           <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
             <Link href="/" className="text-white-700 hover:text-black">
               <Home className="w-6 h-6" />
@@ -40,7 +43,7 @@ export default function RootLayout({
             </Link>
           </div>
         </header>
-        {children}
+        <Provider store={store}>{children}</Provider>
       </body>
     </html>
   );

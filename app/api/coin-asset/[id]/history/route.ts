@@ -1,10 +1,11 @@
 import { CoinCapAssetResponse } from "@/app/types/coincap";
 import { NextResponse } from "next/server";
 
-export const GET = async (_req: Request) => {
+export const GET = async (_req: Request, context: { params: { id: string } }) => {
 
     const { searchParams } = new URL(_req.url)
-    const id = searchParams.get('id') || 'bitcoin'
+    // const id = searchParams.get('id') || 'bitcoin'
+    const { id } = await context.params
     const interval = searchParams.get('interval') || 'd1'
 
     const res = await fetch(`https://rest.coincap.io/v3/assets/${id}/history?interval=${interval}`, {

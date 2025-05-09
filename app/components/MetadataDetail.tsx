@@ -10,7 +10,7 @@ interface MetadataDetailProps {
 
 const MetadataDetail = ({ coin }: MetadataDetailProps) => {
     return (
-        <div className="grid grid-cols-2 gap-3 text-sm text-gray-200 mt-4">
+        <div id={'metadata'} data-testid={'metadata'} className="grid grid-cols-2 gap-3 text-sm text-gray-200 mt-4">
             <div>Supply: <span className="text-white">{formatCurrency(coin.supply)}</span></div>
             <div>Max Supply: <span className="text-white">{coin.maxSupply ? formatCurrency(coin.maxSupply) : 'N/A'}</span></div>
             <div>Market Cap: <span className="text-white">{formatCurrency(coin.marketCapUsd)}</span></div>
