@@ -16,7 +16,7 @@ const ChartDetail = ({ coinHistory, xAxisDataKey, yAxisDataKey }: ChartDetailPro
 
     return (
         <div className="mt-20 mb-20">
-            <LineChart width={1100} height={300} margin={{
+            <LineChart width={1100} height={400} margin={{
                 top: 5,
                 right: 30,
                 left: 20,
