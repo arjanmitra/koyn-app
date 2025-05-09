@@ -6,23 +6,29 @@ This dashboard was built with **Next.js**, **TypeScript**, **Tailwind CSS**, and
 
 ## Setup Instructions
 
-```bash
-
 1. Clone this repo.
+```bash
 git clone https://github.com/arjanmitra/koyn-app.git
+```
 
 2. Install all dependencies.
+```bash
 npm install
+```
 
 3. Set the CoinCap API key in a .env.local file.
+```bash
 COINCAP_API_KEY=your_api_key_here
+```
 
 4. Start the local dev server.
+```bash
 npm run dev
+```
 
 5. Run the tests.
+```bash
 npm run test
-
 ```
 
 ## Architecture & Approach 
