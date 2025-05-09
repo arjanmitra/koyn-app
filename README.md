@@ -1,6 +1,6 @@
-# Coin Dashboard App
+# Koyn
 
-A cryptocurrency dashboard built with **Next.js**, **TypeScript**, **Tailwind CSS**, and **Redux Toolkit**. This project fetches live coin data from the CoinCap API and renders it in a responsive UI with charts and metadata.
+This dashboard was built with **Next.js**, **TypeScript**, **Tailwind CSS**, and **Redux**. This project fetches live coin data from the CoinCap API and renders it in a responsive UI with charts and metadata.
 
 ---
 
@@ -21,22 +21,23 @@ COINCAP_API_KEY=your_api_key_here
 npm run dev
 
 5. Run the tests.
-npm runt test
+npm run test
 
 ```
 
-## Architecture & Approach
+## Architecture & Approach 
 
-Next.js App Router: Leverages the app/ directory for routing, layouts, and server components.
-TypeScript: For static typing, better tooling, and safer code.
-Tailwind CSS: Utility-first CSS framework for styling. Dark/light mode toggles via class strategy.
-Redux Toolkit: Centralized state management for coin data, using createSlice.
-API Routes: Custom endpoints under /api/coin-asset/[id] and /history to securely call the CoinCap API server-side.
-Charting: Implemented using recharts with ResponsiveContainer for mobile-friendly visualization.
-Dark Mode Support: Controlled via a <html class="dark"> toggle and localStorage persistence.
+1. The project was built on Next.js + TypeScript with Tailwind and custom CSS classes for styling and Redux for state management. 
+
+2. The Home page and the coin/[id] pages are SSR. They call the CoinCap APIs directly for an initial load and then render their corresponding client components.
+
+3. Custom API endpoints were created under api/ in order to securely call the CoinCap API routes from the client components.
+
+4. The Recharts library was used to display the chart data for each asset.
+
 
 ## Assumptions & Trade-offs
-Polling every 5 seconds for updated coin data was chosen over websockets for simplicity and API constraints.
-LocalStorage is used for persisting the dark mode preference — this keeps implementation lightweight and avoids introducing more complex state persistence tools.
-Initial coin data and history are passed as props into the client components for hydration, simplifying SSR/ISR for now.
-No pagination or search was implemented in the coin table — future enhancement would involve debounced queries and caching.
+
+1. Since the CoinCap API only provides 2500 credits per month, the home page does not have simulated SSE. Once you click into a specific crypto asset, that asset's page will refresh every 10,000 ms. Only the metadata and values will be refreshed.
+
+2. The chart data is not refreshed as calling the /history CoinCap endpoint is very costly, depending on the interval you are calling.
