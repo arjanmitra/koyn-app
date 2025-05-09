@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Coin Dashboard App
 
-## Getting Started
+A cryptocurrency dashboard built with **Next.js**, **TypeScript**, **Tailwind CSS**, and **Redux Toolkit**. This project fetches live coin data from the CoinCap API and renders it in a responsive UI with charts and metadata.
 
-First, run the development server:
+---
+
+## Setup Instructions
 
 ```bash
+git clone https://github.com/your-username/coin-dashboard.git
+cd coin-dashboard
+
+npm install
+
+COINCAP_API_KEY=your_api_key_here
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+npm test
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Architecture & Approach
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Next.js App Router: Leverages the app/ directory for routing, layouts, and server components.
+TypeScript: For static typing, better tooling, and safer code.
+Tailwind CSS: Utility-first CSS framework for styling. Dark/light mode toggles via class strategy.
+Redux Toolkit: Centralized state management for coin data, using createSlice.
+API Routes: Custom endpoints under /api/coin-asset/[id] and /history to securely call the CoinCap API server-side.
+Charting: Implemented using recharts with ResponsiveContainer for mobile-friendly visualization.
+Dark Mode Support: Controlled via a <html class="dark"> toggle and localStorage persistence.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Assumptions & Trade-offs
+Polling every 5 seconds for updated coin data was chosen over websockets for simplicity and API constraints.
+LocalStorage is used for persisting the dark mode preference — this keeps implementation lightweight and avoids introducing more complex state persistence tools.
+Initial coin data and history are passed as props into the client components for hydration, simplifying SSR/ISR for now.
+No pagination or search was implemented in the coin table — future enhancement would involve debounced queries and caching.
