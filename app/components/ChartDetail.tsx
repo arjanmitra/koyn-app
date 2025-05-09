@@ -1,5 +1,5 @@
 import React from "react";
-import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Legend } from 'recharts';
 import { CoinCapAssetHistory } from "../types/coincap";
 
 interface ChartDetailProps {
