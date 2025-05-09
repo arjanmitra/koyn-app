@@ -5,6 +5,9 @@ import { CoinCapAsset, CoinCapAssetHistory } from '../types/coincap'
 import { formatCurrency } from '../utils/helperFunctions'
 import ChartDetail from './ChartDetail';
 import MetadataDetail from './MetadataDetail';
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { setCoinData } from '../store/slices/coinSlice';
+import { setCoinHistoryData } from '../store/slices/coinHistorySlice';
 
 interface CoinDetailProps {
     initialCoinData: CoinCapAsset,
@@ -12,25 +15,36 @@ interface CoinDetailProps {
 }
 
 const CoinDetail = ({ initialCoinData, initialHistoryData }: CoinDetailProps) => {
-    const [coin, setCoin] = useState<CoinCapAsset>(initialCoinData)
-    const [coinHistory, setCoinHistory] = useState<CoinCapAssetHistory[]>(initialHistoryData)
+    const dispatch = useAppDispatch();
+
+    const coin = useAppSelector(state => state.coin.value)
+    const coinHistory = useAppSelector(state => state.coinHistory.value)
 
     useEffect(() => {
-        const interval = setInterval(async () => {
-            const res = await fetch(`/api/coin-asset/${coin.id}`)
-            const data = await res.json()
-            setCoin(data)
+        dispatch(setCoinData(initialCoinData));
+        dispatch(setCoinHistoryData(initialHistoryData));
+    }, [dispatch, initialCoinData, initialHistoryData]);
 
-            const resHistory = await fetch(`/api/coin-asset/${coin.id}/history`)
-            const dataHistory = await resHistory.json()
-            setCoinHistory(dataHistory)
-        }, 10000)
 
-        return () => clearInterval(interval)
-    }, [coin.id])
+    useEffect(() => {
+        const fetchCoinData = async () => {
+            try {
+                const res = await fetch(`/api/coin-asset/${initialCoinData.id}`);
+                const data = await res.json();
+                dispatch(setCoinData(data));
+            } catch (error) {
+                console.error("Failed to fetch coin data:", error);
+            }
+        };
+
+        fetchCoinData();
+        const interval = setInterval(fetchCoinData, 10000);
+
+        return () => clearInterval(interval);
+    }, [dispatch, initialCoinData.id]);
 
     return (
-        <div className="flex flex-col justify-center items-center ymx-auto p-6 bg-black text-white rounded-lg shadow-md font-sans mt-10 w-full m-w-9/10">
+        <div className="flex flex-col justify-center items-center ymx-auto p-6 chartData text-white rounded-lg shadow-md font-sans mt-10 w-full m-w-9/10">
             <div>
                 <div className="flex items-center justify-between mb-4">
                     <div>
@@ -40,7 +54,7 @@ const CoinDetail = ({ initialCoinData, initialHistoryData }: CoinDetailProps) =>
                 </div>
 
                 <div className="text-3xl font-semibold">{formatCurrency(coin.priceUsd)} USD</div>
-                <ChartDetail coinHistory={coinHistory} xAxisDataKey='date' yAxisDataKey='priceUsd' />
+                {coinHistory ? <ChartDetail coinHistory={coinHistory} xAxisDataKey='date' yAxisDataKey='priceUsd' /> : <></>}
                 <MetadataDetail coin={coin} />
                 <button className="mt-4 text-sm text-gray-400 underline hover:text-white">More about <a href={coin.explorer}>{coin.name}</a></button>
             </div>

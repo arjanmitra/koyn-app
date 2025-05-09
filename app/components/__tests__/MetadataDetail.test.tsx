@@ -27,4 +27,36 @@ describe('CoinHomeDetail', () => {
         expect(div).toBeInTheDocument();
         expect(div.tagName).toBe("DIV");
     })
+    it('expects a span for supply', () => {
+        render(<MetadataDetail coin={dummyData} />)
+
+        const span = screen.getByTestId("supply");
+
+        expect(span).toBeInTheDocument();
+        expect(span.tagName).toBe("SPAN");
+    })
+    it("renders a span with a numeric string", () => {
+        render(<MetadataDetail coin={dummyData} />);
+
+        const span = screen.getByTestId("supply");
+        expect(span).toBeInTheDocument();
+
+        const content: any = span.textContent;
+        expect(typeof content).toBe("string");
+
+        // Check if the string is a valid number
+        expect(content[0]).toBe('$');
+    });
+    it("expects VWAP to be a percetnage", () => {
+        render(<MetadataDetail coin={dummyData} />);
+
+        const span = screen.getByTestId("vwap");
+        expect(span).toBeInTheDocument();
+
+        const content: any = span.textContent;
+        expect(typeof content).toBe("string");
+
+        // Check if the string is a valid number
+        expect(content[content.length - 1]).toBe('%');
+    });
 })

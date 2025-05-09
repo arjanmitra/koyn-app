@@ -32,15 +32,10 @@ const CoinHomeDetail = ({ coinData }: CoinHomeDetailProps) => {
             const aValue = a[sortKey];
             const bValue = b[sortKey];
 
-            if (typeof aValue === "string") {
-                return sortDirection === "asc"
-                    ? aValue.localeCompare(bValue as string)
-                    : (bValue as string).localeCompare(aValue);
-            }
-
             return sortDirection === "asc"
-                ? (aValue as number) - ((bValue as unknown) as number)
-                : ((bValue as unknown) as number) - (aValue as number);
+                ? +aValue - +bValue
+                : +bValue - +aValue
+
         });
         return sorted;
     }, [coins, sortKey, sortDirection]);
@@ -73,18 +68,20 @@ const CoinHomeDetail = ({ coinData }: CoinHomeDetailProps) => {
         <div className="flex justify-center items-center mt-20 font-sans font-thin">
             <div className="overflow-x-auto rounded-xl border-none w-full max-w-8/10">
                 <table className="border text-sm text-left w-full border-none">
-                    <thead className="bg-gray-500">
+                    <thead className="tableHeader">
                         <tr>
                             {renderHeader("Rank", "rank")}
-                            {renderHeader("Name", "name")}
+                            <th className="border-b px-4 py-2 cursor-pointer select-none">
+                                <div className="flex items-center gap-1">Name</div>
+                            </th>
                             {renderHeader("Price", "priceUsd")}
                             {renderHeader("Market Cap", "marketCapUsd")}
                             {renderHeader("Volume", "volumeUsd24Hr")}
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="tableData">
                         {sortedData ? sortedData.map((coin, i) => (
-                            <tr key={i} className="hover:bg-gray-500 bg-gray-700 cursor-pointer h-20" onClick={() => handleRowClick(coin.id)}>
+                            <tr key={i} className="cursor-pointer h-20" onClick={() => handleRowClick(coin.id)}>
                                 <td className="border-b px-4 py-2 text-2xl">{coin.rank}</td>
                                 <td className="border-b px-4 py-2 font-medium text-2xl">{coin.name}</td>
                                 <td className="border-b px-4 py-2 font-medium text-2xl">{formatCurrency(coin.priceUsd)}</td>

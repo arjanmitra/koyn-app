@@ -3,7 +3,7 @@ import { setCoinsData } from "./store/slices/coinsSlice";
 
 const CoinHome = async () => {
 
-  const res = await fetch(`https://rest.coincap.io/v3/assets?limit=4`, {
+  const res = await fetch(`https://rest.coincap.io/v3/assets?limit=20`, {
     headers: { Authorization: `Bearer ${process.env.COINCAP_API_KEY}` },
     cache: 'no-store'
   })
