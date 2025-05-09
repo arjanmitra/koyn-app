@@ -1,6 +1,6 @@
 # Koyn
 
-This dashboard was built with **Next.js**, **TypeScript**, **Tailwind CSS**, and **Redux**. This project fetches live coin data from the CoinCap API and renders it in a responsive UI with charts and metadata.
+This app was built with **Next.js**, **TypeScript**, **Tailwind CSS**, and **Redux**. This project fetches live coin data from the CoinCap API and renders it in a responsive UI with charts and metadata.
 
 ---
 
